@@ -4,6 +4,7 @@ class Data{
     Int id
     String name
     Datetime created_at
+    Datetime updated_at
 
     + create()
 
@@ -19,29 +20,30 @@ class User{
 
 class Category{
     Int color
+    Int Foreignkey user_id
 
-    + Confirmation()
-    + Change()
-    + Delete()
+    + reading()
+    + change()
+    + delete()
 
 }
 
 class Task{
-    Int category_id
     String place
     Float importance
     String memo
     Datetime due_at
-    Datetime updated_at
     Int completion
+    Int Foreignkey category_id
+    Int Foreignkey user_id
 
     + sort()
-    + notice()
+    + announce()
     + check()
     + check_hide()
-    + Confirmation()
-    + Change()
-    + Delete()
+    + reading()
+    + change()
+    + delete()
 }
 
 Data <|-- User
