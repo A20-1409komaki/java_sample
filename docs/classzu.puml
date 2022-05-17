@@ -1,0 +1,56 @@
+@startuml
+
+class Data{
+    Int id
+    String name
+    Datetime created_at
+    Datetime updated_at
+
+    + create()
+
+}
+
+class User{
+    String email
+    String password
+
+    + login()
+    + logout()
+}
+
+class Category{
+    Int color
+    Int Foreignkey user_id
+
+    + reading()
+    + change()
+    + delete()
+
+}
+
+class Task{
+    String place
+    Float importance
+    String memo
+    Datetime due_at
+    Int completion
+    Int Foreignkey category_id
+    Int Foreignkey user_id
+
+    + sort()
+    + announce()
+    + check()
+    + check_hide()
+    + reading()
+    + change()
+    + delete()
+}
+
+Data <|-- User
+Data <|-- Task
+Data <|-- Category
+User "1" -- "0..*" Task
+Category "0..1" - "0..*" Task
+User "1" -- "0..*" Category
+
+@enduml
