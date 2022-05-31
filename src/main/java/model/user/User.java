@@ -45,4 +45,19 @@ public class User extends Default {
     public void signUpUser() {
         Repository.signUpUser(this);
     }
+
+    // ログイン用メソッド
+    public User login() {
+        // emailをもとにユーザーが存在するかどうか調べる
+        User curentUser = Repository.selectUserByEmail(this.email);
+        System.out.println(curentUser.getPass());
+        System.out.println(this.pass);
+        //返されたユーザーのパスワードと入力されたパスワードが一致するか確認する。一致しなかったらcuurentUserをnullにする。
+        if(curentUser != null){
+            if(!(curentUser.getPass().equals(this.pass))){
+                curentUser = null;
+            }
+        }
+        return curentUser;
+    }
 }
