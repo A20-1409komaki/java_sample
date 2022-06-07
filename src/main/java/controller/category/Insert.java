@@ -1,5 +1,6 @@
 package controller.category;
-//import model.category.*;
+import model.category.*;
+import model.user.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -7,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @WebServlet("/category/insert")
 public class Insert extends HttpServlet {
@@ -15,10 +17,14 @@ public class Insert extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-   /* protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         String color = req.getParameter("color");
+
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("currentUser");
+
 
         Category category = new Category(
                 null,
@@ -26,7 +32,7 @@ public class Insert extends HttpServlet {
                 color,
                 null,
                 null,
-                null
+                user.getId()
         );
 
         category.insert();
@@ -34,5 +40,5 @@ public class Insert extends HttpServlet {
         // 新規登録が終わったらログイン画面に遷移
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
         dispatcher.forward(req, resp);
-    }*/
+    }
 }

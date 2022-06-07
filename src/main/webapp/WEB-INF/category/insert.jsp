@@ -18,7 +18,7 @@
         <label for="title">カテゴリ名</label>
         <input type="text" class="form-control"  data-cke-saved-name="name" name="name"><br>
         <label for="title">色</label>
-        <input type="color" id="title" data-cke-saved-name="color"
+        <input type="color" id="title" data-cke-saved-name="color" name="color"
                value="#e66465">
     </div>
     <button type="submit">送信</button>

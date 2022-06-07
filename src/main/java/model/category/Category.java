@@ -3,20 +3,49 @@ import model.Default;
 import java.sql.Timestamp;
 public class Category extends Default {
     private String name;
-    private Integer color;
+    private String color;
+    private Integer userId;
     public Category(
             Integer id,
             String name,
-            Integer color,
+            String color,
             Timestamp createdAt,
             Timestamp updatedAt,
-            Integer user_id
+            Integer userId
     ){
         //親クラス(Default)のコンストラクタを呼び出す
         super(id, createdAt, updatedAt);
         this.name=  name;
         this.color = color;
+        this.userId = userId;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void insert() {
+        Repository.insert(this);
+    }
 
 }
