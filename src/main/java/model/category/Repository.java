@@ -33,7 +33,7 @@ public class Repository extends Client {
         }
     }
 
-    /*public static ArrayList<Category> indexCategories(User user) {
+    public static ArrayList<Category> indexCategories(User user) {
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -53,6 +53,7 @@ public class Repository extends Client {
                         rs.getString("name"),
                         null,
                         null,
+                        null,
                         null
                 );
                 categories.add(category);
@@ -65,5 +66,5 @@ public class Repository extends Client {
         } finally {
             close(connection, stmt, rs);
         }
-    }*/
+    }
 }
