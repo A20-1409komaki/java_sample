@@ -11,6 +11,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @WebServlet("/user/login")
 public class Login extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
+        dispatcher.forward(req, resp);
+    }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         // フォームで入力した内容を受け取る
