@@ -44,7 +44,7 @@ public class Repository extends Client {
         ResultSet rs = null;
 
         try {
-            String sql = "select * from tasks where user_id = ?";
+            String sql = "select * from tasks where users_id = ? order by categories_id asc";
 
             connection = create();
             stmt = connection.prepareStatement(sql);
@@ -63,8 +63,8 @@ public class Repository extends Client {
                         null,
                         null,
                         0,
-                        null,
-                        null
+                        rs.getInt("users_id"),
+                        rs.getInt("categories_id")
                 );
                 tasks.add(task);
             }
