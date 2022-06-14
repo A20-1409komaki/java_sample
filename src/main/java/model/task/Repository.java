@@ -1,4 +1,4 @@
-package model.category;
+package model.task;
 
 import lib.mysql.Client;
 import model.user.User;
@@ -7,23 +7,28 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Repository extends Client {
-    public static void insert(Category category) {
+    public static void insert(Task task) {
         Connection connection = null;
         PreparedStatement stmt = null;
 
         try {
-            String sql = "insert into categories (name, color, created_at, updated_at, user_id) values (?, ?, ?, ?, ?)";
+            String sql = "insert into tasks (name, place, importance, memo, due_at, created_at, updated_at, completion,  users_id, categories_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             connection = create();
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, category.getName());
-            stmt.setString(2, category.getColor());
-            stmt.setTimestamp(3, currentTime);
-            stmt.setTimestamp(4, currentTime);
-            stmt.setInt(5, category.getUserId());
+            stmt.setString(1, task.getName());
+            stmt.setString(2, task.getPlace());
+            stmt.setFloat(3, task.getImportance());
+            stmt.setString(4, task.getMemo());
+            stmt.setDate(5, (Date) task.getDueAt());
+            stmt.setTimestamp(6, currentTime);
+            stmt.setTimestamp(7, currentTime);
+            stmt.setInt(8, task.getCompletion());
+            stmt.setInt(9, task.getUserId());
+            stmt.setInt(10, task.getCategoryId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -33,32 +38,37 @@ public class Repository extends Client {
         }
     }
 
-    public static ArrayList<Category> indexCategories(User user) {
+    public static ArrayList<Task> indexTasks(User user) {
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
-            String sql = "select * from categories where user_id = ?";
+            String sql = "select * from tasks where user_id = ?";
 
             connection = create();
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, user.getId());
             rs = stmt.executeQuery();
 
-            ArrayList<Category> categories = new ArrayList<>();
+            ArrayList<Task> tasks = new ArrayList<>();
             while (rs.next()) {
-                Category category = new Category(
+                Task task = new Task(
                         rs.getInt("id"),
                         rs.getString("name"),
+                        rs.getString("place"),
+                        rs.getFloat("importance"),
+                        rs.getString("memo"),
+                        rs.getTimestamp("due_at"),
                         null,
                         null,
+                        0,
                         null,
                         null
                 );
-                categories.add(category);
+                tasks.add(task);
             }
-            return categories;
+            return tasks;
 
         } catch (SQLException e) {
             e.printStackTrace();

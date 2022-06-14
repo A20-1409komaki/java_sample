@@ -1,6 +1,11 @@
 package model.category;
 import model.Default;
+import model.user.User;
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Category extends Default {
     private String name;
     private String color;
@@ -47,5 +52,10 @@ public class Category extends Default {
     public void insert() {
         Repository.insert(this);
     }
+
+    public static ArrayList<Category> indexCategories(User user) {
+        return Repository.indexCategories(user);
+    }
+
 
 }
