@@ -108,7 +108,7 @@ public class Task extends Default {
         Repository.insert(this);
     }
 
-    public static ArrayList<Task> indexCategories(User user) {
+    public static ArrayList<Task> indexTasks(User user) {
         return Repository.indexTasks(user);
     }
 
