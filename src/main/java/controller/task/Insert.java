@@ -55,8 +55,7 @@ public class Insert extends HttpServlet {
         task.insert();
 
         // 新規登録が終わったらログイン画面に遷移
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect("/task/read");
     }
 
 
