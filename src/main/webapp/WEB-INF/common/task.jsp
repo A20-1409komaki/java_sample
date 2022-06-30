@@ -16,6 +16,7 @@
     <c:if test="${empty item.dueAt}"><p>期限：--------</p></c:if>
     <c:if test="${not empty item.memo}"><p>詳細：${item.memo}</p></c:if>
     <c:if test="${empty item.memo}"><p>詳細：--------</p></c:if>
+    <p><a href="/task/update?taskid=${item.id}">変更</a></p>
   </div>
   <br>
 </c:forEach>
