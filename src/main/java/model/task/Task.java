@@ -108,9 +108,14 @@ public class Task extends Default {
         Repository.insert(this);
     }
 
+    public Task search(){
+        Task task = Repository.search(this);
+        return task;
+    }
+
     public static ArrayList<Task> indexTasks(User user) {
         return Repository.indexTasks(user);
     }
 
-
+    public void update(){Repository.update(this);}
 }
