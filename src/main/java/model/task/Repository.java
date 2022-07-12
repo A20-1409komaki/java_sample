@@ -144,4 +144,24 @@ public class Repository extends Client {
             close(connection, stmt, null);
         }
     }
+
+    public static void delete(Task task){
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try{
+            String sql = "DELETE from tasks where id = ?";
+
+            connection = create();
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,task.getId());
+
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            close(connection, stmt,null);
+        }
+    }
 }
