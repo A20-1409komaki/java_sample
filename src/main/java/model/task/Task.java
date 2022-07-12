@@ -118,4 +118,7 @@ public class Task extends Default {
     }
 
     public void update(){Repository.update(this);}
+
+    public void delete(){ Repository.delete(this);}
+
 }
