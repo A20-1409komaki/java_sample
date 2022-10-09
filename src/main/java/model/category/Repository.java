@@ -1,6 +1,7 @@
 package model.category;
 
 import lib.mysql.Client;
+import model.task.Task;
 import model.user.User;
 
 import java.sql.*;
@@ -67,4 +68,85 @@ public class Repository extends Client {
             close(connection, stmt, rs);
         }
     }
+
+    public static Category search(Category category){
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "select * from categories where id = ? ";
+
+            connection = create();
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, category.getId());
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                category = new Category(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("color"),
+                        null,
+                        null,
+                        rs.getInt("user_id")
+                );
+            }
+            return category;
+        } catch (SQLException e) {
+            System.out.println("見つかりません");
+            e.printStackTrace();
+            return null;
+        } finally {
+            close(connection, stmt, rs);
+        }
+    }
+
+
+    public static void update(Category category){
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "update categories set name = ?, color = ?, updated_at = ? where id = ?";
+
+            connection = create();
+
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, category.getName());
+            stmt.setString(2,category.getColor());
+            stmt.setTimestamp(3, currentTime);
+            stmt.setInt(4,category.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, stmt, null);
+        }
+    }
+
+    public static void delete(Category category){
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try{
+            String sql = "DELETE from categories where id = ?";
+
+            connection = create();
+
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1,category.getId());
+
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            close(connection, stmt,null);
+        }
+    }
+
+
 }

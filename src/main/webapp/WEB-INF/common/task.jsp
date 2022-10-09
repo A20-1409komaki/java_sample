@@ -5,6 +5,7 @@
     <c:forEach items = "${categories}" var = "category">
       <c:if test="${category.id == item.categoryId}">
         <h3>${category.name}</h3>
+        <p><a href="/category/update?categoryid=${category.id}">変更</a></p>
       </c:if>
     </c:forEach>
     <c:set var = "count" value="${item.categoryId}"/>

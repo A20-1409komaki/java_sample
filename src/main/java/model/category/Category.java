@@ -1,5 +1,6 @@
 package model.category;
 import model.Default;
+import model.task.Task;
 import model.user.User;
 
 import java.sql.Timestamp;
@@ -53,9 +54,18 @@ public class Category extends Default {
         Repository.insert(this);
     }
 
+    public Category search(){
+        Category category = model.category.Repository.search(this);
+        return category;
+    }
+
     public static ArrayList<Category> indexCategories(User user) {
         return Repository.indexCategories(user);
     }
 
+    public void update(){
+        model.category.Repository.update(this);}
+
+    public void delete(){ model.category.Repository.delete(this);}
 
 }
